@@ -1,6 +1,6 @@
 # Progress
 
-Status: local v0.1.0 candidate complete and verified; GitHub repository and release are not created yet.
+Status: public v0.1.0 candidate published; GitHub repository and Pages demo are live. A version tag/release and integration with the original site remain separate decisions.
 
 ## Verified environment
 
@@ -8,7 +8,7 @@ Status: local v0.1.0 candidate complete and verified; GitHub repository and rele
 - Original engine reference commit: `0d07e0dd212bcd942de366e9650d05042bf0099e`.
 - Node.js: v24.19.0.
 - MoonBit was absent from PATH at intake. A pinned official toolchain is available in the ignored sibling `work/moonbit-toolchain` directory.
-- GitHub CLI reports its existing account token invalid. A fresh device authorization is required before remote creation.
+- GitHub CLI was authorized with a project-local configuration directory; the credential directory is outside this repository and is not committed.
 - Native PowerShell/curl TLS failed; Node fetch successfully retrieved the official installer over verified HTTPS.
 
 ## Completed verification
@@ -19,6 +19,8 @@ Status: local v0.1.0 candidate complete and verified; GitHub repository and rele
 - Browser: 1440, 1280, 1024, 768 and 390px had no horizontal overflow; synthetic demo and 159919, VOO and 02800 loaded and calculated; index investment form was hidden.
 - Source boundary scan: no credentials, private keys, local user paths, internal brand assets or build outputs in the publication file set.
 - Generated screenshots and batch reports are ignored under `artifacts/` and are local evidence only.
+- Remote GitHub Actions CI run `34432373709`: Windows and Ubuntu jobs passed.
+- GitHub Pages workflow run `34432456093`: build and deployment passed. Demo URL: https://maureen-11.github.io/investing-clarity-moonbit/
 
 ## Methodology findings to resolve explicitly
 
@@ -29,7 +31,6 @@ Status: local v0.1.0 candidate complete and verified; GitHub repository and rele
 
 ## Next
 
-1. Owner completes GitHub device authorization for the new device code.
-2. Create the public sibling repository and push the reviewed source through a PR.
-3. Configure CI and retain its actual result; do not describe local checks as remote checks.
-4. Only after review, tag `v0.1.0` and discuss integration with the original site.
+1. Review the public repository and Pages demo with representative browsers.
+2. Decide whether to tag `v0.1.0` and create a GitHub release.
+3. Only after review, discuss integration with the original site.

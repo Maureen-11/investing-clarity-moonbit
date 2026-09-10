@@ -16,7 +16,7 @@
 - 指数只提供市场统计；两只标的按共同日历区间比较的 API。
 - 浏览器按需加载原项目数据，人工离线示例须由用户主动选择。
 
-本地已验证原数据包300只ETF及15个指数。数据文件仍在原仓库，本仓库不复制完整市场历史。当前为本地 `0.1.0-candidate`，正式 release、远程CI结果和原站接入状态见 [进度](docs/progress.md)。
+本地已验证原数据包300只ETF及15个指数。数据文件仍在原仓库，本仓库不复制完整市场历史。当前为公开的 `0.1.0-candidate`；[GitHub Actions CI](https://github.com/Maureen-11/investing-clarity-moonbit/actions) 和 [Pages 演示](https://maureen-11.github.io/investing-clarity-moonbit/) 已部署，正式 release 与原站接入状态见 [进度](docs/progress.md)。
 
 ## 安装与运行
 
@@ -32,7 +32,7 @@ node --test tests/*.test.mjs
 node scripts/serve.mjs
 ```
 
-仓库公开前，直接在提供的本地目录执行 `node` 命令；clone 地址将在仓库创建后可用。打开 `http://127.0.0.1:4188/`。基础运行和测试不需要 npm 依赖。浏览器需支持 Wasm GC、JS String Builtins及模块Worker，已验证本机 Chrome；其他浏览器尚未逐一验证。
+也可以直接打开 [Pages 演示](https://maureen-11.github.io/investing-clarity-moonbit/)。本地运行时打开 `http://127.0.0.1:4188/`；基础运行和测试不需要 npm 依赖。浏览器需支持 Wasm GC、JS String Builtins及模块Worker，已验证本机 Chrome；其他浏览器尚未逐一验证。
 
 网页中先选择标的或人工教学示例，再设置日期、投入频率、金额和期限。高级设置可调整汇率、CPI、费率情景及交易单位。期末价值包含本金；购买力金额使用起始日的人民币价值尺度。
 

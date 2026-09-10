@@ -16,7 +16,7 @@ This repository is independent of the original TypeScript website. The earlier p
 - Index-only market statistics, plus a common-calendar-interval comparison API.
 - On-demand data loading from the original project and an explicitly selected synthetic offline example.
 
-Local validation covers the original dataset's 300 ETFs and 15 indices. Full histories remain in the original repository. The current version is a local `0.1.0-candidate`; see [progress](docs/progress.md) for remote CI, release and integration status.
+Local validation covers the original dataset's 300 ETFs and 15 indices. Full histories remain in the original repository. The current version is a public `0.1.0-candidate`; [GitHub Actions CI](https://github.com/Maureen-11/investing-clarity-moonbit/actions) and the [Pages demo](https://maureen-11.github.io/investing-clarity-moonbit/) are deployed. See [progress](docs/progress.md) for release and integration status.
 
 ## Requirements and setup
 
@@ -32,7 +32,7 @@ node --test tests/*.test.mjs
 node scripts/serve.mjs
 ```
 
-Until the public repository is created, run the Node commands inside the supplied local directory. Open `http://127.0.0.1:4188/`. Core builds and tests require no npm dependencies. The browser must support Wasm GC, JS String Builtins and module workers. Local Chrome has been tested; other browsers have not been individually verified.
+You can open the [Pages demo](https://maureen-11.github.io/investing-clarity-moonbit/), or run the Node commands locally and open `http://127.0.0.1:4188/`. Core builds and tests require no npm dependencies. The browser must support Wasm GC, JS String Builtins and module workers. Local Chrome has been tested; other browsers have not been individually verified.
 
 Select a security or the artificial teaching example, then choose dates, frequency, amount and duration. Advanced settings control FX, CPI, fee scenarios and trading units. Ending value includes principal; real value is expressed in starting-date CNY purchasing power.
 
