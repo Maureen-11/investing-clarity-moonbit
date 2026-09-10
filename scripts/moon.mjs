@@ -1,0 +1,11 @@
+import { spawnSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
+import { resolve, dirname, delimiter } from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const local = resolve(root, '../work/moonbit-toolchain/runtime');
+const home = process.env.MOON_HOME || (existsSync(resolve(local, 'bin/moon.exe')) ? local : undefined);
+const exe = home ? resolve(home, 'bin', process.platform === 'win32' ? 'moon.exe' : 'moon') : 'moon';
+const result = spawnSync(exe, process.argv.slice(2), { cwd: root, stdio: 'inherit', env: { ...process.env, ...(home ? { MOON_HOME: home, PATH: `${home}/bin${delimiter}${process.env.PATH}` } : {}) } });
+if (result.error) console.error(result.error.message);
+process.exit(result.status ?? 1);

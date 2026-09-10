@@ -1,0 +1,14 @@
+_build/
+target/
+.mooncakes/
+node_modules/
+demo/engine.wasm
+artifacts/
+.env*
+*.log
+.DS_Store
+.tools/
+.cache/
+.wrangler/
+.openai/
+*.pem

@@ -1,0 +1,46 @@
+name: MoonBit checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  engine:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      MOONBIT_INSTALL_VERSION: 0.10.12+1634b282e
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install pinned MoonBit (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          curl --fail --location https://cli.moonbitlang.com/install/unix.sh -o "$RUNNER_TEMP/moonbit-install.sh"
+          bash "$RUNNER_TEMP/moonbit-install.sh"
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+      - name: Install pinned MoonBit (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          Invoke-WebRequest https://cli.moonbitlang.com/install/powershell.ps1 -OutFile "$env:RUNNER_TEMP/moonbit-install.ps1"
+          & "$env:RUNNER_TEMP/moonbit-install.ps1"
+          "$env:USERPROFILE/.moon/bin" >> $env:GITHUB_PATH
+      - run: node scripts/moon.mjs version
+      - run: node scripts/moon.mjs check
+      - run: node scripts/moon.mjs test
+      - run: node scripts/build.mjs
+      - run: node --test tests/*.test.mjs
+      - name: Browser smoke (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          npm install --no-save --package-lock=false playwright@1.62.1
+          npx playwright install --with-deps chromium
+          node scripts/serve.mjs &
+          node scripts/browser-check.mjs
+      - name: Scan source publication boundary
+        run: node scripts/scan.mjs

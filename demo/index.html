@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>简投学堂 · MoonBit 计算实验室</title><link rel="stylesheet" href="./style.css"></head>
+<body>
+<header><a href="./">简投学堂 <span>MoonBit Lab</span></a><span id="engine-status" role="status">引擎正在加载…</span></header>
+<main>
+<section class="intro"><p class="eyebrow">INVESTING CLARITY / MOONBIT</p><h1>把长期投资，<br><em>放进真实的历史里。</em></h1><p>先看投入，再看波动。选择一段历史，理解金额、费用、汇率和通胀怎样改变结果。</p><p class="boundary">教育性历史分析 · 不预测未来 · 数据不是实时行情</p></section>
+<div class="workspace">
+<form id="plan"><h2>你的研究条件</h2>
+<label>查找标的<input id="search" type="search" placeholder="代码、名称，例如 VOO、沪深300"></label>
+<label>选择ETF或参照指数<select id="security"><option value="">先使用下方教学示例，或等待目录加载</option></select></label>
+<p id="data-state" role="status">正在读取原项目标的目录…</p>
+<button type="button" id="offline" class="secondary">使用人工教学示例</button>
+<div id="investment-inputs">
+<div class="pair"><label>起始日期<input id="start" type="date" required></label><label>计划年限<input id="years" type="number" min="1" max="100" value="20" required></label></div>
+<div class="pair"><label>投入频率<select id="frequency"><option value="daily">每个可用交易日</option><option value="monthly" selected>每月</option><option value="yearly">每年</option></select></label><label>每次投入（人民币元）<input id="payment" type="number" min="0" value="300" required></label></div>
+<details><summary>高级设置：费用、购买力与汇率</summary>
+<div class="pair"><label>初始金额（元）<input id="initial" type="number" min="0" value="0"></label><label>未来/缺口通胀（%）<input id="inflation" type="number" min="-99" max="100" step="0.1" value="2.5"></label></div>
+<label>人民币换算<select id="fx-mode"><option value="fixed">固定汇率情景</option><option value="historical">原项目历史汇率</option></select></label>
+<label>1报价货币折合人民币（固定值/缺口备用）<input id="fx" type="number" min="0.000001" step="0.000001" value="1"></label>
+<label>购买力<select id="cpi-mode"><option value="scenario">固定通胀情景</option><option value="historical">原项目历史CPI</option></select></label>
+<label>费率估算（% / 年；未知留空）<input id="fee" type="number" min="0" max="100" step="0.001" placeholder="未知，不自动填入管理费"></label>
+<p class="small">管理费与总费率口径不同。此处为独立反事实估算，不会再次从历史余额扣费。</p>
+<div class="pair"><label>交易单位<select id="unit"><option value="fractional">理论碎股</option><option value="whole">整股 / 整手</option></select></label><label>每手份额<input id="lot" type="number" min="1" value="1"></label></div>
+<label class="checkbox"><input id="growth" type="checkbox">每次投入随购买力水平增长</label>
+<label>历史模式<select id="mode"><option value="replay">从所选日期回放</option><option value="rolling">比较各月开始的完整历史路径</option></select></label>
+</details></div>
+<button id="calculate" type="submit" disabled>计算这段历史 →</button>
+</form>
+<section id="results" aria-live="polite"><div class="empty"><p class="eyebrow">START WITH A QUESTION</p><h2>这笔投入，<br>在过去会经历什么？</h2><p>选择标的后，由 MoonBit 在浏览器中计算。也可以先用人工教学示例体验；示例不代表真实投资收益。</p></div></section>
+</div>
+<section class="method"><h2>怎么看这些结果？</h2><div class="method-grid"><p><b>账户价值 ≠ 赚到的钱</b><br>期末价值包含你的本金。先对照总投入，再理解盈亏。</p><p><b>历史范围 ≠ 未来概率</b><br>滚动结果描述过去的不同起点；相邻窗口相互重叠。</p><p><b>先看数据边界</b><br>供应商调整价格不是基金公司官方总回报；未经确认的展示许可会明确标注。</p></div></section>
+</main><footer>Investing Clarity MoonBit · <a href="https://github.com/Maureen-11/investing-clarity-lab">前期原型与数据来源</a> · 不构成买卖建议</footer>
+<script type="module" src="./app.mjs"></script></body></html>

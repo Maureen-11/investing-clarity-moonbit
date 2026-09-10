@@ -1,0 +1,8 @@
+{
+  "name": "Maureen-11/investing-clarity-moonbit",
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository": "https://github.com/Maureen-11/investing-clarity-moonbit",
+  "description": "MoonBit historical investment research engine",
+  "preferred-target": "wasm-gc"
+}
