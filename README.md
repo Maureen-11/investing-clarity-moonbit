@@ -17,7 +17,7 @@
 - 浏览器按需加载原项目数据，人工离线示例须由用户主动选择。
 - 工具页提供“人工教学示例”，无需外部行情即可复核 MoonBit 的 JSON 输入、投入次数和期末价值。
 
-本地已验证原数据包300只ETF及15个指数。数据文件仍在原仓库，本仓库不复制完整市场历史。当前为公开的 `0.1.0-candidate`；[GitHub Actions CI](https://github.com/Maureen-11/investing-clarity-moonbit/actions) 和 [Pages 演示](https://maureen-11.github.io/investing-clarity-moonbit/) 已部署，正式 release 与原站接入状态见 [进度](docs/progress.md)。
+本地已验证原数据包300只ETF及15个指数。数据文件仍在原仓库，本仓库不复制完整市场历史。远程 `main` 目前保留公开的 `0.1.0-candidate`、[GitHub Actions CI](https://github.com/Maureen-11/investing-clarity-moonbit/actions) 和 [Pages 演示](https://maureen-11.github.io/investing-clarity-moonbit/)；当前 `codex/mvp-local-candidate` 只是本地候选，尚未发布。正式 release 与原站接入状态见 [进度](docs/progress.md)。
 
 ## 安装与运行
 

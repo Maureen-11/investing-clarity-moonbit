@@ -1,6 +1,6 @@
 # Progress
 
-Status: MVP candidate prepared locally on `codex/mvp-local-candidate`. Eight substantive local commits now sit on top of the two existing remote commits (10 total in this candidate); none have been pushed. Public release remains pending owner approval and organizer qualification confirmation.
+Status: MVP candidate prepared locally on `codex/mvp-local-candidate`. Eleven local commits now sit on top of the two existing remote commits (13 total in this candidate); ten carry substantive engine, web, test, build, CI or review-documentation work and the final one records inventory plus the public-status clarification. None have been pushed. Public release remains pending owner approval and organizer qualification confirmation.
 
 ## Verified environment
 
@@ -50,7 +50,7 @@ Status: MVP candidate prepared locally on `codex/mvp-local-candidate`. Eight sub
 
 ## Local commit series
 
-The candidate keeps the existing two remote commits unchanged and adds these eight purpose-specific commits locally: engine contract (`235c126`), web replica (`6e64d85`), browser checks (`d582d1a`), offline teaching fixture (`7915602`), pinned build (`06fb439`), CI (`0a7ffe1`), Pages build (`e126ee7`), and review documentation (`c122919`). This is a local review artifact, not yet a public development record.
+The candidate keeps the existing two remote commits unchanged and adds these ten substantive local commits: engine contract (`235c126`), web replica (`6e64d85`), browser checks (`d582d1a`), offline teaching fixture (`7915602`), pinned build (`06fb439`), CI (`0a7ffe1`), Pages build (`e126ee7`), review documentation (`c122919`), verification record (`73cc918`) and portable Windows setup notes (`5926090`). The HEAD commit records the final inventory and clarifies which Pages state is remote versus local. This is a local review artifact, not yet a public development record.
 
 ## Next
 
