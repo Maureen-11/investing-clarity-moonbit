@@ -23,8 +23,7 @@ The current iteration adds a MoonBit implementation of the version 1 calculation
 ## Reproduction commands
 
 ```sh
-corepack enable
-corepack prepare pnpm@9.15.4 --activate
+npm install --global pnpm@9.15.4
 pnpm install --frozen-lockfile
 node scripts/moon.mjs check
 node scripts/moon.mjs test

@@ -26,8 +26,7 @@ Node.js 24+, pnpm 9.15.4 and the MoonBit toolchain are required. Tested with com
 ```sh
 git clone https://github.com/Maureen-11/investing-clarity-moonbit.git
 cd investing-clarity-moonbit
-corepack enable
-corepack prepare pnpm@9.15.4 --activate
+npm install --global pnpm@9.15.4
 pnpm install --frozen-lockfile
 node scripts/moon.mjs check
 node scripts/moon.mjs test

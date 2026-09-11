@@ -8,6 +8,7 @@ Status: MVP candidate prepared locally on `codex/mvp-local-candidate`. Eight sub
 - Original engine reference commit: `0d07e0dd212bcd942de366e9650d05042bf0099e`.
 - Node.js: v24.19.0.
 - MoonBit was absent from PATH at intake. A pinned official toolchain is available in the ignored sibling `work/moonbit-toolchain` directory.
+- The local bundled pnpm runtime used for verification is 11.19.0; the repository declares and CI installs pnpm 9.15.4. The README uses an npm global-install command because this Node distribution does not include `corepack`.
 - GitHub CLI was authorized with a project-local configuration directory; the credential directory is outside this repository and is not committed.
 - Native PowerShell/curl TLS failed; Node fetch successfully retrieved the official installer over verified HTTPS.
 
