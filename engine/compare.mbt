@@ -24,7 +24,9 @@ pub fn compare_json(input : String) -> String {
         _ => raise Invalid("History must be an object")
       }
       match req { Object(m) => m["startDate"] = @json.to_json(start); _ => () }
-      analyze(req)
+      let result=analyze(req)
+      match result {Object(m)=>m["metrics"]=enriched_metrics(selected);_=>()}
+      result
     }
     let result : Json = { "ok": true, "schemaVersion": 1, "commonStart": start, "commonEnd": end, "first": trim(a, first), "second": trim(b, second), "note": "Calendar overlap; market observations can differ. No observations beyond commonEnd are included." }
     finite_json(result)

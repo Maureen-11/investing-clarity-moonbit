@@ -15,5 +15,6 @@ export async function createEngine(bytes) {
     validateHistory: request => invoke('validate_history_json', request),
     analyze: request => invoke('analyze_json', request),
     compare: request => invoke('compare_json', request),
+    ui: request => invoke('ui_json', request),
   };
 }

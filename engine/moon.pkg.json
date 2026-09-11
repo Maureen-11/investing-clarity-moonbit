@@ -1,4 +1,4 @@
 {
   "import": ["moonbitlang/core/json", "moonbitlang/core/math"],
-  "link": {"wasm-gc": {"exports": ["add", "echo_json", "analyze_json", "validate_history_json", "compare_json"], "use-js-builtin-string": true}}
+  "link": {"wasm-gc": {"exports": ["add", "echo_json", "analyze_json", "validate_history_json", "compare_json", "ui_json"], "use-js-builtin-string": true}}
 }

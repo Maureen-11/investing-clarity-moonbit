@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { engine, request, syntheticPoints } from './helpers.mjs';
+import { base, engine, request, syntheticPoints } from './helpers.mjs';
 const near = (a,b) => assert.ok(Math.abs(a-b)<1e-8, `${a} != ${b}`);
 const run = req => { const out=engine.analyze(req); assert.equal(out.ok,true,JSON.stringify(out)); return out; };
 
@@ -86,4 +86,19 @@ test('comparison excludes the first observation after common end',()=>{
   const out=engine.compare({first,second}); assert.equal(out.ok,true,JSON.stringify(out));
   assert.equal(out.commonStart,'2020-01-02');assert.equal(out.commonEnd,'2020-01-04');
   assert.equal(out.first.replay.end,'2020-01-03');assert.equal(out.second.replay.end,'2020-01-04');
+});
+
+test('UI plan and metrics-only ETF comparison keep semantic boundaries',()=>{
+  const plan=engine.ui({schemaVersion:1,action:'plan',startDate:'2026-01-01',years:1,market:'US',options:{...base,frequency:'daily'},calendarRules:{US:{days:252,knownYears:['2026'],holidays:[]}}});
+  assert.equal(plan.ok,true,JSON.stringify(plan));
+  assert.equal(plan.result.contributions,261);
+  const first=request([['2020-01-01',10],['2020-01-02',11],['2020-01-03',12]],{}, {history:{instrumentKind:'etf',points:[['2020-01-01',10],['2020-01-02',11],['2020-01-03',12]],firstDate:'2020-01-01',lastDate:'2020-01-03',source:'fixture',licenseStatus:'verified',seriesType:'vendor-adjusted-price'}});
+  const second=request([['2020-01-02',20],['2020-01-03',18]],{}, {history:{instrumentKind:'etf',points:[['2020-01-02',20],['2020-01-03',18]],firstDate:'2020-01-02',lastDate:'2020-01-03',source:'fixture',licenseStatus:'verified',seriesType:'vendor-adjusted-price'}});
+  const compared=engine.ui({schemaVersion:1,action:'compare',first,second});
+  assert.equal(compared.ok,true,JSON.stringify(compared));
+  assert.equal(compared.result.commonStart,'2020-01-02');
+  assert.equal(compared.result.commonEnd,'2020-01-03');
+  assert.equal(compared.result.first.history.firstDate,'2020-01-02');
+  assert.equal(compared.result.second.history.lastDate,'2020-01-03');
+  assert.equal(compared.result.first.history.instrumentKind,'etf');
 });
