@@ -12,3 +12,13 @@ History date/type/provenance must survive analysis. No index DCA, invented years
 JSON numbers cannot represent NaN: absent fee rates are null, never fabricated zero fees.
 Do not publish a release or change the original website integration before the owner reviews the local candidate.
 Repository creation and source publication are authorized; use exact file staging and PRs after initialization.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
