@@ -12,9 +12,14 @@ jobs:
       MOONBIT_INSTALL_VERSION: 0.10.12+1634b282e
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
       - name: Install pinned MoonBit (Linux)
         if: runner.os == 'Linux'
         shell: bash
@@ -32,15 +37,16 @@ jobs:
       - run: node scripts/moon.mjs version
       - run: node scripts/moon.mjs check
       - run: node scripts/moon.mjs test
+      - run: pnpm run lint
       - run: node scripts/build.mjs
       - run: node --test tests/*.test.mjs
+      - run: pnpm run build:web
       - name: Browser smoke (Linux)
         if: runner.os == 'Linux'
         shell: bash
         run: |
-          npm install --no-save --package-lock=false playwright@1.62.1
-          npx playwright install --with-deps chromium
-          node scripts/serve.mjs &
-          node scripts/browser-check.mjs
+          pnpm exec playwright install --with-deps chromium
+          node scripts/serve-web.mjs &
+          node scripts/browser-check-web.mjs
       - name: Scan source publication boundary
         run: node scripts/scan.mjs
