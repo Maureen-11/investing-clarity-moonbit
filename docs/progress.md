@@ -1,6 +1,6 @@
 # Progress
 
-Status: MVP candidate prepared locally on `codex/mvp-local-candidate`. Thirteen local commits now sit on top of the two existing remote commits (15 total in this candidate); twelve carry substantive engine, web, test, build, CI, review-documentation or verification work and one records inventory plus the public-status clarification. None have been pushed. Public release remains pending owner approval and organizer qualification confirmation.
+Status: MVP candidate prepared locally on `codex/mvp-local-candidate`. Fourteen local commits now sit on top of the two existing remote commits (16 total in this candidate); thirteen carry substantive engine, web, test, build, CI, review-documentation or verification work and one records inventory plus the public-status clarification. None have been pushed. Public release remains pending owner approval and organizer qualification confirmation.
 
 ## Verified environment
 
@@ -53,7 +53,7 @@ Status: MVP candidate prepared locally on `codex/mvp-local-candidate`. Thirteen 
 
 ## Local commit series
 
-The candidate keeps the existing two remote commits unchanged and adds these twelve substantive local commits: engine contract (`235c126`), web replica (`6e64d85`), browser checks (`d582d1a`), offline teaching fixture (`7915602`), pinned build (`06fb439`), CI (`0a7ffe1`), Pages build (`e126ee7`), review documentation (`c122919`), verification record (`73cc918`), portable Windows setup notes (`5926090`), clean-checkout/subpath verification (`63c7312`) and offline failure handling with deterministic browser checks (current commit). The preceding HEAD commit (`211a713`) records the final inventory and clarifies which Pages state is remote versus local. This is a local review artifact, not yet a public development record.
+The candidate keeps the existing two remote commits unchanged and adds these thirteen substantive local commits: engine contract (`235c126`), web replica (`6e64d85`), browser checks (`d582d1a`), offline teaching fixture (`7915602`), pinned build (`06fb439`), CI (`0a7ffe1`), Pages build (`e126ee7`), review documentation (`c122919`), verification record (`73cc918`), portable Windows setup notes (`5926090`), clean-checkout/subpath verification (`63c7312`), offline failure handling with deterministic browser checks (`c7d9805`) and final local acceptance record (current commit). The preceding HEAD commit (`211a713`) records the final inventory and clarifies which Pages state is remote versus local. This is a local review artifact, not yet a public development record.
 
 ## Next
 

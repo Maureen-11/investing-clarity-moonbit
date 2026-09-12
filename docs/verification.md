@@ -1,6 +1,6 @@
 # Local verification record
 
-Recorded 2026-09-11 for the local `0.1.0-candidate`.
+Recorded 2026-09-12 for the local `0.1.0-candidate`.
 
 | Check | Result |
 | --- | --- |
