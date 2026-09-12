@@ -1,7 +1,11 @@
 import type { EtfPackEntry, EtfPackManifest, HistoryLibrary, HistorySeries, MacroHistory, Security } from './engine';
 const base='https://maureen-11.github.io/investing-clarity-lab/';
+// The public directory is a compressed multi-market snapshot. On slower
+// connections it can take longer than a typical page request, so leave
+// enough time for the first load without changing the offline teaching path.
+const DATA_TIMEOUT_MS=90000;
 async function json<T>(path:string):Promise<T>{
-  const response=await fetch(new URL(path,base),{signal:AbortSignal.timeout(25000)});
+  const response=await fetch(new URL(path,base),{signal:AbortSignal.timeout(DATA_TIMEOUT_MS)});
   if(!response.ok)throw new Error(`历史数据请求失败（${response.status}），请重试`);
   return response.json();
 }
