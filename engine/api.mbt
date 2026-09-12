@@ -91,7 +91,11 @@ fn analyze(j : Json) -> Json raise {
   if o.historical_cpi && (o.cpi_points.is_empty() || anchor < o.cpi_points[0].date || last > o.cpi_points[o.cpi_points.length()-1].date) { warnings.push("INFLATION_SCENARIO_USED_OUTSIDE_CPI_HISTORY") }
   if o.fee is None { warnings.push("FEE_RATE_UNKNOWN") } else { warnings.push("FEE_DRAG_IS_COUNTERFACTUAL_NOT_DEDUCTED_AGAIN") }
   let r = replay(points, start, end, o, true, anchor)
-  let rolls = if mode == "rolling" { rolling(points, years, o) } else { None }
+  let mut rolling_years=years
+  if field(j,"availableWindow")==@json.to_json(true) {
+    while rolling_years>0 && month_later(first,rolling_years*12)>last {rolling_years=rolling_years-1}
+  }
+  let rolls = if mode == "rolling" && rolling_years>0 { rolling(points, rolling_years, o) } else { None }
   if mode == "rolling" && rolls is None { warnings.push("NO_FULL_ROLLING_WINDOW_FULL_AVAILABLE_REPLAY_SHOWN") }
   { "ok": true, "schemaVersion": 1, "engineVersion": "0.1.0-candidate", "mode": mode, "source": source, "warnings": @json.to_json(warnings), "requestedYears": years, "availableYears": distance(points[start].date, points[end].date).to_double()/365.25, "replay": replay_json(r), "rolling": rolling_json(rolls), "metrics": metrics_json(metrics(points)) }
 }
@@ -106,7 +110,7 @@ fn replay_json(r : Replay) -> Json raise {
   for value in [r.endValue, r.realEndValue, r.principal, r.multiple, r.productMaxDrawdown, r.accountWorstReturn, r.inflationFactor, r.startFx, r.endFx, r.cashQuote, r.feeDrag.unwrap_or(0.0)] { require_finite(value) }
   for p in r.path { for value in [p.value, p.principal, p.realValue, p.realPrincipal] { require_finite(value) } }
   let j = @json.to_json(r)
-  match j { Object(m) => m["feeDrag"] = nullable(r.feeDrag); _ => () }
+  match j { Object(m) => {m["feeDrag"] = nullable(r.feeDrag);m["estimatedDirectFee"]=nullable(r.estimatedDirectFee);m["profit"]=@json.to_json(r.endValue-r.principal)}; _ => () }
   j
 }
 

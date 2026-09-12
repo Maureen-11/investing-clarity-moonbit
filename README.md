@@ -15,26 +15,29 @@
 - 历史不足时显示实际可用区间；不足一年保留事实统计并关闭年化。
 - 指数只提供市场统计；两只标的按共同日历区间比较的 API。
 - 浏览器按需加载原项目数据，人工离线示例须由用户主动选择。
+- 工具页提供“人工教学示例”，无需外部行情即可复核 MoonBit 的 JSON 输入、投入次数和期末价值。
 
-本地已验证原数据包300只ETF及15个指数。数据文件仍在原仓库，本仓库不复制完整市场历史。当前为公开的 `0.1.0-candidate`；[GitHub Actions CI](https://github.com/Maureen-11/investing-clarity-moonbit/actions) 和 [Pages 演示](https://maureen-11.github.io/investing-clarity-moonbit/) 已部署，正式 release 与原站接入状态见 [进度](docs/progress.md)。
+本地已验证原数据包300只ETF及15个指数。数据文件仍在原仓库，本仓库不复制完整市场历史。远程 `main` 目前保留公开的 `0.1.0-candidate`、[GitHub Actions CI](https://github.com/Maureen-11/investing-clarity-moonbit/actions) 和 [Pages 演示](https://maureen-11.github.io/investing-clarity-moonbit/)；当前 `codex/mvp-local-candidate` 只是本地候选，尚未发布。正式 release 与原站接入状态见 [进度](docs/progress.md)。
 
 ## 安装与运行
 
-需要 Node.js 24+ 和 MoonBit 工具链。已测试编译器 `v0.10.12+1634b282e`、moon `0.1.20260904`。安装方法见 [官方文档](https://www.moonbitlang.com/download)。可设置 `MOON_HOME` 指向独立安装目录。
+需要 Node.js 24+、pnpm 9.15.4 和 MoonBit 工具链。已测试编译器 `v0.10.12+1634b282e`、moon `0.1.20260904`。安装方法见 [官方文档](https://www.moonbitlang.com/download)。可设置 `MOON_HOME` 指向独立安装目录。
 
 ```sh
 git clone https://github.com/Maureen-11/investing-clarity-moonbit.git
 cd investing-clarity-moonbit
+npm install --global pnpm@9.15.4
+pnpm install --frozen-lockfile
 node scripts/moon.mjs check
 node scripts/moon.mjs test
 node scripts/build.mjs
 node --test tests/*.test.mjs
-node scripts/serve.mjs
+pnpm run dev
 ```
 
-也可以直接打开 [Pages 演示](https://maureen-11.github.io/investing-clarity-moonbit/)。本地运行时打开 `http://127.0.0.1:4188/`；基础运行和测试不需要 npm 依赖。浏览器需支持 Wasm GC、JS String Builtins及模块Worker，已验证本机 Chrome；其他浏览器尚未逐一验证。
+也可以直接打开 [Pages 演示](https://maureen-11.github.io/investing-clarity-moonbit/)。本地运行时打开 `http://127.0.0.1:4188/`，然后访问 `/plan/`；网页预览需要 Next/React 依赖，MoonBit 单元测试仍可独立运行。浏览器需支持 Wasm GC、JS String Builtins及模块Worker，已验证本机 Chrome；其他浏览器尚未逐一验证。静态导出使用 `pnpm run build:web`，输出在 `out/`。
 
-网页中先选择标的或人工教学示例，再设置日期、投入频率、金额和期限。高级设置可调整汇率、CPI、费率情景及交易单位。期末价值包含本金；购买力金额使用起始日的人民币价值尺度。
+网页中先选择标的或人工教学示例，再设置日期、投入频率、金额和期限。离线教学示例来自仓库内的人工三点数据，只用于复核，不代表任何真实证券。高级设置可调整汇率、CPI、费率情景及交易单位。期末价值包含本金；购买力金额使用起始日的人民币价值尺度。
 
 ## 输入输出示例
 

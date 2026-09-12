@@ -1,0 +1,18 @@
+{
+  "source": "人工构造教学数据",
+  "sourceUrl": "",
+  "provider": "fixture",
+  "retrieved": "2026-09-11",
+  "firstDate": "2020-01-01",
+  "lastDate": "2020-01-03",
+  "points": [
+    ["2020-01-01", 10],
+    ["2020-01-02", 10],
+    ["2020-01-03", 15]
+  ],
+  "seriesType": "price-only",
+  "licenseStatus": "verified",
+  "adjustment": "none",
+  "instrumentKind": "etf",
+  "updateWarning": "仅用于复核计算流程，不代表任何真实证券或投资收益。"
+}

@@ -19,23 +19,42 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MOONBIT_INSTALL_VERSION: 0.10.12+1634b282e
+      NEXT_PUBLIC_BASE_PATH: /investing-clarity-moonbit
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
       - name: Install pinned MoonBit
         shell: bash
         run: |
           curl --fail --location https://cli.moonbitlang.com/install/unix.sh -o "$RUNNER_TEMP/moonbit-install.sh"
           bash "$RUNNER_TEMP/moonbit-install.sh"
           echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
-      - run: node scripts/moon.mjs check
-      - run: node scripts/build.mjs
+      - run: pnpm run check
+      - run: pnpm run lint
+      - run: pnpm test
+      - run: pnpm run build:web
+      - name: Browser smoke (project path)
+        shell: bash
+        run: |
+          pnpm exec playwright install --with-deps chromium
+          PORT=4188 BASE_PATH=/investing-clarity-moonbit node scripts/serve-web.mjs &
+          for i in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4188/investing-clarity-moonbit/ >/dev/null; then break; fi
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:4188/investing-clarity-moonbit/ >/dev/null
+          WEB_URL=http://127.0.0.1:4188/investing-clarity-moonbit node scripts/browser-check-web.mjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: demo
+          path: out
 
   deploy:
     needs: build

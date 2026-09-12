@@ -15,26 +15,29 @@ This repository is independent of the original TypeScript website. The earlier p
 - Explicit available-history windows; factual statistics remain visible below one year while annualization is disabled.
 - Index-only market statistics, plus a common-calendar-interval comparison API.
 - On-demand data loading from the original project and an explicitly selected synthetic offline example.
+- The plan page includes an offline teaching example so reviewers can verify the MoonBit JSON flow without market data access.
 
-Local validation covers the original dataset's 300 ETFs and 15 indices. Full histories remain in the original repository. The current version is a public `0.1.0-candidate`; [GitHub Actions CI](https://github.com/Maureen-11/investing-clarity-moonbit/actions) and the [Pages demo](https://maureen-11.github.io/investing-clarity-moonbit/) are deployed. See [progress](docs/progress.md) for release and integration status.
+Local validation covers the original dataset's 300 ETFs and 15 indices. Full histories remain in the original repository. The remote `main` currently retains the public `0.1.0-candidate`, [GitHub Actions CI](https://github.com/Maureen-11/investing-clarity-moonbit/actions) and [Pages demo](https://maureen-11.github.io/investing-clarity-moonbit/); the current `codex/mvp-local-candidate` is a local candidate and has not been published. See [progress](docs/progress.md) for release and integration status.
 
 ## Requirements and setup
 
-Node.js 24+ and the MoonBit toolchain are required. Tested with compiler `v0.10.12+1634b282e` and moon `0.1.20260904`. Follow the [official installation instructions](https://www.moonbitlang.com/download). `MOON_HOME` can point to an isolated installation.
+Node.js 24+, pnpm 9.15.4 and the MoonBit toolchain are required. Tested with compiler `v0.10.12+1634b282e` and moon `0.1.20260904`. Follow the [official installation instructions](https://www.moonbitlang.com/download). `MOON_HOME` can point to an isolated installation.
 
 ```sh
 git clone https://github.com/Maureen-11/investing-clarity-moonbit.git
 cd investing-clarity-moonbit
+npm install --global pnpm@9.15.4
+pnpm install --frozen-lockfile
 node scripts/moon.mjs check
 node scripts/moon.mjs test
 node scripts/build.mjs
 node --test tests/*.test.mjs
-node scripts/serve.mjs
+pnpm run dev
 ```
 
-You can open the [Pages demo](https://maureen-11.github.io/investing-clarity-moonbit/), or run the Node commands locally and open `http://127.0.0.1:4188/`. Core builds and tests require no npm dependencies. The browser must support Wasm GC, JS String Builtins and module workers. Local Chrome has been tested; other browsers have not been individually verified.
+You can open the [Pages demo](https://maureen-11.github.io/investing-clarity-moonbit/), or run the local Next preview at `http://127.0.0.1:4188/` and open `/plan/`. The browser preview needs the Next/React dependencies; MoonBit unit tests can still run independently. Use `pnpm run build:web` for a static export in `out/`. The browser must support Wasm GC, JS String Builtins and module workers. Local Chrome has been tested; other browsers have not been individually verified.
 
-Select a security or the artificial teaching example, then choose dates, frequency, amount and duration. Advanced settings control FX, CPI, fee scenarios and trading units. Ending value includes principal; real value is expressed in starting-date CNY purchasing power.
+Select a security or the artificial teaching example, then choose dates, frequency, amount and duration. The teaching fixture is an artificial three-point dataset for calculation review and does not represent a real security. Advanced settings control FX, CPI, fee scenarios and trading units. Ending value includes principal; real value is expressed in starting-date CNY purchasing power.
 
 ## Input and output example
 

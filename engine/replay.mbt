@@ -56,6 +56,7 @@ struct Replay {
   accountWorstReturn : Double
   recoveryDays : Int
   feeDrag : Double?
+  estimatedDirectFee : Double?
   feeRateKnown : Bool
   inflationFactor : Double
   startFx : Double
@@ -82,6 +83,8 @@ fn replay(points : Array[Point], start : Int, end : Int, o : Options, capture : 
   let mut recovery = 0
   let mut account_worst = 0.0
   let fee = o.fee.unwrap_or(0.0)
+  let mut direct_fee = 0.0
+  let mut previous_value = o.initial
   let path : Array[PathPoint] = []
   let contributions = scheduled(points, start, end, o, anchor)
   for i = start; i <= end; i = i + 1 {
@@ -107,6 +110,8 @@ fn replay(points : Array[Point], start : Int, end : Int, o : Options, capture : 
       peak_date = p.date
     } else { drawdown = Double::min(drawdown, p.price / peak - 1.0) }
     let value = (shares * p.price + cash) * fx
+    if i > start { direct_fee = direct_fee + previous_value * fee / 100.0 * distance(points[i-1].date,p.date).to_double() / 365.25 }
+    previous_value = value
     if principal > 0.0 { account_worst = Double::min(account_worst, value / principal - 1.0) }
     if capture && (i == start || i == end || i % 21 == 0) {
       path.push({ date: p.date, value, principal, realValue: value / power_factor(o, anchor, p.date), realPrincipal: real_principal })
@@ -119,5 +124,5 @@ fn replay(points : Array[Point], start : Int, end : Int, o : Options, capture : 
   let elapsed = distance(start_date, terminal.date).to_double() / 365.25
   let no_fee_value = (no_fee_shares * terminal.price * @math.exp(fee / 100.0 * elapsed) + no_fee_cash) * end_fx
   let factor = power_factor(o, anchor, terminal.date)
-  { anchorDate: anchor, start: start_date, end: terminal.date, startIndex: start, endIndex: end, endValue: end_value, realEndValue: end_value / factor, principal, contributions: count, multiple: if principal > 0.0 { end_value / principal } else { 0.0 }, productMaxDrawdown: drawdown * 100.0, accountWorstReturn: account_worst * 100.0, recoveryDays: recovery, feeDrag: if o.fee is Some(_) { Some(Double::max(0.0, no_fee_value - end_value)) } else { None }, feeRateKnown: o.fee is Some(_), inflationFactor: factor, startFx: start_fx, endFx: end_fx, cashQuote: cash, path }
+  { anchorDate: anchor, start: start_date, end: terminal.date, startIndex: start, endIndex: end, endValue: end_value, realEndValue: end_value / factor, principal, contributions: count, multiple: if principal > 0.0 { end_value / principal } else { 0.0 }, productMaxDrawdown: drawdown * 100.0, accountWorstReturn: account_worst * 100.0, recoveryDays: recovery, feeDrag: if o.fee is Some(_) { Some(Double::max(0.0, no_fee_value - end_value)) } else { None }, estimatedDirectFee: if o.fee is Some(_) {Some(direct_fee)}else{None}, feeRateKnown: o.fee is Some(_), inflationFactor: factor, startFx: start_fx, endFx: end_fx, cashQuote: cash, path }
 }

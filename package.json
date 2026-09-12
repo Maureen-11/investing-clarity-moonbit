@@ -3,12 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@9.15.4",
   "engines": {"node": ">=24"},
   "scripts": {
     "check": "node scripts/moon.mjs check",
     "build": "node scripts/build.mjs",
     "test": "node scripts/moon.mjs test && node scripts/build.mjs && node --test tests/*.test.mjs",
-    "dev": "node scripts/serve.mjs",
+    "dev": "next dev --port 4188",
+    "dev:legacy": "node scripts/serve.mjs",
+    "build:web": "node scripts/build.mjs && next build --webpack",
+    "lint": "node node_modules/typescript/bin/tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "validate:upstream": "node scripts/validate-upstream.mjs"
-  }
+  },
+  "dependencies": {"next":"16.3.1","react":"19.2.8","react-dom":"19.2.8"},
+  "devDependencies": {"typescript":"5.9.3","@types/node":"22.19.19","@types/react":"19.2.3","@types/react-dom":"19.2.3","playwright":"1.62.1"}
 }

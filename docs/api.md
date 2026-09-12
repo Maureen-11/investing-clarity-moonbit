@@ -1,6 +1,6 @@
 # JSON contract v1
 
-`createEngine(wasmBytes)` exposes `validateHistory(request)`, `analyze(request)` and `compare({first,second})`. All financial computations run in MoonBit. Numeric inputs/outputs are JSON numbers, dates are valid `YYYY-MM-DD` strings in 1900..2200. Non-finite values cannot be encoded. History arrays contain at most 50,000 positive observations in strictly increasing date order.
+`createEngine(wasmBytes)` exposes `validateHistory(request)`, `analyze(request)`, `compare({first,second})` and `ui(request)`. All financial computations run in MoonBit. Numeric inputs/outputs are JSON numbers, dates are valid `YYYY-MM-DD` strings in 1900..2200. Non-finite values cannot be encoded. History arrays contain at most 50,000 positive observations in strictly increasing date order.
 
 ## Request
 
@@ -37,4 +37,6 @@ Errors: `{ "ok": false, "schemaVersion": 1, "error": { "code": "INVALID_INPUT", 
 
 Comparison clips both requests to their shared calendar interval without including any observation after commonEnd. Markets may have different actual first/last observations inside that interval. Caller must supply comparable assumptions; the API does not silently replace differing fees/FX settings.
 
-Wasm exports `analyze_json`, `validate_history_json`, `compare_json`, plus tiny numeric/JSON diagnostic exports. The tested instantiation settings are `builtins: ['js-string']` and `importedStringConstants: '_'`. Both JSON parsing and financial calculations are inside MoonBit. Workers prevent long rolling analyses from blocking page interaction.
+Wasm exports `analyze_json`, `validate_history_json`, `compare_json`, `ui_json`, plus tiny numeric/JSON diagnostic exports. The tested instantiation settings are `builtins: ['js-string']` and `importedStringConstants: '_'`. Both JSON parsing and financial calculations are inside MoonBit. Workers prevent long rolling analyses from blocking page interaction.
+
+The UI adapter keeps schema version 1. `ui({action:"plan", ...})` returns the projected calendar and principal summary; `ui({action:"metrics", history})` adds short-history-safe annual and rolling summaries; `ui({action:"compare", first, second})` returns both histories trimmed to their common interval and their metrics without changing either instrument kind; and `ui({action:"channels", ...})` returns channel-fee counterfactual rows. These are presentation adapters over MoonBit calculations, not a second TypeScript finance engine.

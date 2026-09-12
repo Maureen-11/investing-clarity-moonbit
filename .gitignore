@@ -12,3 +12,7 @@ artifacts/
 .wrangler/
 .openai/
 *.pem
+.next/
+out/
+public/wasm/
+*.tsbuildinfo
