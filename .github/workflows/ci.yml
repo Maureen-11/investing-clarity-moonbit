@@ -47,6 +47,11 @@ jobs:
         run: |
           pnpm exec playwright install --with-deps chromium
           node scripts/serve-web.mjs &
+          for i in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4188/ >/dev/null; then break; fi
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:4188/ >/dev/null
           node scripts/browser-check-web.mjs
       - name: Scan source publication boundary
         run: node scripts/scan.mjs

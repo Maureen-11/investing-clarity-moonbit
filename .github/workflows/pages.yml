@@ -40,6 +40,17 @@ jobs:
       - run: pnpm run lint
       - run: pnpm test
       - run: pnpm run build:web
+      - name: Browser smoke (project path)
+        shell: bash
+        run: |
+          pnpm exec playwright install --with-deps chromium
+          PORT=4188 BASE_PATH=/investing-clarity-moonbit node scripts/serve-web.mjs &
+          for i in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4188/investing-clarity-moonbit/ >/dev/null; then break; fi
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:4188/investing-clarity-moonbit/ >/dev/null
+          WEB_URL=http://127.0.0.1:4188/investing-clarity-moonbit node scripts/browser-check-web.mjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -45,7 +45,9 @@ try{
     await search.fill(symbol);
     await page.locator('#calculator .search-menu button').filter({hasText:symbol}).first().click();
     await page.locator('.outcome-focus strong').waitFor({timeout:60000});
-    report.cases.push({symbol,value:await page.locator('.outcome-focus strong').innerText(),charts:await page.locator('svg').count()});
+    const value = await page.locator('.outcome-focus strong').innerText();
+    if (symbol === '159919' && value.includes('300元')) throw Error('teaching result leaked into real ETF selection');
+    report.cases.push({symbol,value,charts:await page.locator('svg').count()});
   }
   // Verify keyboard selection and the shared-history comparison workbench.
   const compareA=page.locator('#security-a');

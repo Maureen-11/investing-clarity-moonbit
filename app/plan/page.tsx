@@ -155,13 +155,16 @@ export default function PlanPage() {
         updated: bundle.etfManifest.generated, instrumentKind: "index",
       }));
       setDirectory([...bundle.directory, ...indices]);
-      setHistoryLibrary(bundle.historyLibrary);
+      // Keep any locally selected teaching fixture or already loaded history
+      // when the initial directory request finishes after user interaction.
+      setHistoryLibrary((current) => ({ ...current, ...bundle.historyLibrary }));
       setEtfManifest(bundle.etfManifest);
       setMacroHistory(bundle.macroHistory);
       setDataSource(bundle.source);
     }).catch(() => {
       setDirectoryError(true);
-      setHistoryLibrary({});
+      // A failed directory request must not erase a fixture or history that
+      // the user selected before the request settled.
       setEtfManifest(null);
       setMacroHistory(null);
     });
