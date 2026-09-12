@@ -44,7 +44,7 @@ The current local verification recorded 27 MoonBit tests, 27 Node/bridge tests, 
 ## Re-review message template
 
 > 我的项目“简投学堂 MoonBit 版”已补充可运行 MVP：MoonBit 负责定投日程、投入、历史回放、风险、费用、汇率和通胀计算，并通过 WebAssembly 接入网页；仓库提供离线教学示例、README、测试、CI 和可复现命令。前期 React/TypeScript 网站、证券目录和历史资料作为既有基础已在文档中披露。本次新增工作的提交、PR 和演示链接如下：
-> 
+>
 > 仓库：https://github.com/Maureen-11/investing-clarity-moonbit
-> 
+>
 > 请问当前版本是否可以按“应用与内容工具”方向重新审核？另外，赛期提交数量是否存在必须达到的最低值（例如十个有实质内容的 commits），以及是否需要补充项目分类说明或其他验收材料？

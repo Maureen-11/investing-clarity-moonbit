@@ -15,7 +15,6 @@ export function isFundLike(security: Security | null | undefined) {
   const value = `${security.assetType} ${security.name}`.toLowerCase();
   return value.includes("etf") || value.includes("基金") || value.includes("reit") || value.includes("exchange traded");
 }
-
 export function isIndex(security: Security | null | undefined, packEntry?: EtfPackEntry) {
   return security?.instrumentKind === "index" || packEntry?.instrumentKind === "index";
 }
@@ -87,4 +86,3 @@ export function historyFor(library: Record<string, HistorySeries>, security: Sec
   if (!security) return undefined;
   return library[security.id] ?? library[security.symbol];
 }
-
