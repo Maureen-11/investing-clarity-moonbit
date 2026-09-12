@@ -32,7 +32,7 @@ pnpm run build:web
 node --test tests/*.test.mjs
 ```
 
-The current local verification recorded 27 MoonBit tests, 27 Node/bridge tests, a 300-ETF and 15-index compatibility run, five viewport checks without horizontal overflow, and a static browser smoke that loaded `/`, `/plan/`, the Worker, Wasm and the offline teaching result.
+The verification recorded 27 MoonBit tests, 27 Node/bridge tests, a 300-ETF and 15-index compatibility run, five viewport checks without horizontal overflow, and browser smoke that loaded `/`, `/plan/`, the Worker, Wasm and the offline teaching result. PR #1 and PR #2 are merged; the public Pages deployment passed its project-path browser smoke.
 
 ## Known limits to state during review
 

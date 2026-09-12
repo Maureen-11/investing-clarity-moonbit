@@ -1,6 +1,6 @@
 # Progress
 
-Status: MVP candidate prepared locally on `codex/mvp-local-candidate`. Fifteen local commits now sit on top of the two existing remote commits (17 total in this candidate); thirteen carry substantive engine, web, test, build, CI, review-documentation or verification work and two record inventory/public-status or final file-format normalization. None have been pushed. Public release remains pending owner approval and organizer qualification confirmation.
+Status: MVP candidate is publicly deployed on `main` at [GitHub Pages](https://maureen-11.github.io/investing-clarity-moonbit/). PR #1 published the local MVP and PR #2 fixed slow public directory loading; both were merged with required checks passing. The original local candidate history remains available on `codex/mvp-local-candidate`, while the public `main` now includes the merged release and its deployment records.
 
 ## Verified environment
 
@@ -21,7 +21,7 @@ Status: MVP candidate prepared locally on `codex/mvp-local-candidate`. Fifteen l
 - Local source boundary scan: no credentials, private keys, local user paths, internal brand assets or build outputs in the publication file set.
 - Generated screenshots and batch reports are ignored under `artifacts/` and are local evidence only.
 - A repository-local artificial teaching fixture is now available for offline review; it is not a real security or market result.
-- CI and Pages workflow files now target the Next static build in `out/`; this change has not been run remotely or deployed from this local turn.
+- CI and Pages workflow files target the Next static build in `out/`; the merged `main` workflows completed successfully for the public release, including the project-path browser smoke and deployment.
 
 ## Methodology findings to resolve explicitly
 
@@ -53,10 +53,10 @@ Status: MVP candidate prepared locally on `codex/mvp-local-candidate`. Fifteen l
 
 ## Local commit series
 
-The candidate keeps the existing two remote commits unchanged and adds these thirteen substantive local commits: engine contract (`235c126`), web replica (`6e64d85`), browser checks (`d582d1a`), offline teaching fixture (`7915602`), pinned build (`06fb439`), CI (`0a7ffe1`), Pages build (`e126ee7`), review documentation (`c122919`), verification record (`73cc918`), portable Windows setup notes (`5926090`), clean-checkout/subpath verification (`63c7312`), offline failure handling with deterministic browser checks (`c7d9805`) and final local acceptance record (`f70ed38`). The two record-only commits are inventory/public-status clarification (`211a713`) and final file-format normalization (current commit). This is a local review artifact, not yet a public development record.
+The candidate keeps the original two remote commits and its 15-commit local development series. PR #1 merged the MVP as `be78b0d`; PR #2 merged the slow-directory fix as `426507c`. The local branch also retains the original verification and documentation chronology; the remote `main` is the public source of truth after those merges.
 
 ## Next
 
-1. Owner reviews the local MVP and the short review guide in `docs/review-package.md`.
-2. Confirm the organizer's minimum effective commit requirement and project classification in writing.
-3. If approved, push this branch, open a PR, wait for CI, deploy the new `out/` Pages artifact and submit the re-review message.
+1. Owner reviews the live MVP and the short review guide in `docs/review-package.md`.
+2. Submit the re-review message with the public repository, Pages URL, PR links and verification evidence.
+3. Confirm the organizer's project classification and any minimum effective commit requirement in writing; these are not stated as guaranteed by the public competition page.

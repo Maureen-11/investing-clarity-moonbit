@@ -17,7 +17,7 @@ This repository is independent of the original TypeScript website. The earlier p
 - On-demand data loading from the original project and an explicitly selected synthetic offline example.
 - The plan page includes an offline teaching example so reviewers can verify the MoonBit JSON flow without market data access.
 
-Local validation covers the original dataset's 300 ETFs and 15 indices. Full histories remain in the original repository. The remote `main` currently retains the public `0.1.0-candidate`, [GitHub Actions CI](https://github.com/Maureen-11/investing-clarity-moonbit/actions) and [Pages demo](https://maureen-11.github.io/investing-clarity-moonbit/); the current `codex/mvp-local-candidate` is a local candidate and has not been published. See [progress](docs/progress.md) for release and integration status.
+Local validation covers the original dataset's 300 ETFs and 15 indices. Full histories remain in the original repository. The remote `main` now publishes the `0.1.0-candidate`, with [GitHub Actions CI](https://github.com/Maureen-11/investing-clarity-moonbit/actions) and a working [Pages demo](https://maureen-11.github.io/investing-clarity-moonbit/); the directory-load timeout fix was merged in PR #2. See [progress](docs/progress.md) for release and integration status.
 
 ## Requirements and setup
 
